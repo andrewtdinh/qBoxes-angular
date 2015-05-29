@@ -32,22 +32,22 @@ angular.module('starter.controllers', ['starter.services', 'starter.constants', 
     }
   }
 
-  // $rootScope.afAuth.$onAuth(function(data){
-  //   if(data){
-  //     $rootScope.activeUser = data;
-  //     $rootScope.displayName = getDisplayName(data);
-  //     $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
-  //     User.initialize().then(function(response){
-  //       $rootScope.activeUser.mongoId = response.data;
-  //       goHome();
-  //     });
-  //   }else{
-  //     $rootScope.activeUser = null;
-  //     $rootScope.displayName = null;
-  //     $http.defaults.headers.common.Authorization = null;
-  //     // goHome();
-  //   }
-  // });
+  $rootScope.afAuth.$onAuth(function(data){
+    if(data){
+      $rootScope.activeUser = data;
+      $rootScope.displayName = getDisplayName(data);
+      $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
+      User.initialize().then(function(response){
+        $rootScope.activeUser.mongoId = response.data;
+        goHome();
+      });
+    }else{
+      $rootScope.activeUser = null;
+      $rootScope.displayName = null;
+      $http.defaults.headers.common.Authorization = null;
+      // goHome();
+    }
+  });
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
