@@ -32,7 +32,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.constants', 
     }
   }
 
-  $scope.afAuth.$onAuth(function(data){
+  $rootScope.afAuth.$onAuth(function(data){
     if(data){
       $rootScope.activeUser = data;
       $rootScope.displayName = getDisplayName(data);
