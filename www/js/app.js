@@ -18,8 +18,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebase'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    $rootScope.fbRoot = new $window.Firebase(firebaseUrl);
-    $rootScope.afAuth = $firebaseAuth($rootScope.fbRoot);
+    // $rootScope.fbRoot = new $window.Firebase(firebaseUrl);
+    // $rootScope.afAuth = $firebaseAuth($rootScope.fbRoot);
     console.log('$rootScope.afAuth', $rootScope.afAuth);
     console.log('firebaseUrl', firebaseUrl);
   });

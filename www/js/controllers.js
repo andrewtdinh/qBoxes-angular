@@ -2,7 +2,10 @@
 
 angular.module('starter.controllers', ['starter.services', 'starter.constants', 'firebase', 'ngCordova', 'ngCordovaOauth'])
 
-.controller('AppCtrl', function($firebaseObject, $scope, $ionicModal, $rootScope, $cordovaOauth, $ionicPopup, User, $http, $state) {
+.controller('AppCtrl', function($window, firebaseUrl, $firebaseAuth, $firebaseObject, $scope, $ionicModal, $rootScope, $cordovaOauth, $ionicPopup, User, $http, $state) {
+  $rootScope.fbRoot = new $window.Firebase(firebaseUrl);
+  $rootScope.afAuth = $firebaseAuth($rootScope.fbRoot);
+
   function goHome(){
     $state.go('app.home');
   }
@@ -45,7 +48,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.constants', 
       $rootScope.activeUser = null;
       $rootScope.displayName = null;
       $http.defaults.headers.common.Authorization = null;
-      // goHome();
+      goHome();
     }
   });
   // Triggered in the login modal to close it
