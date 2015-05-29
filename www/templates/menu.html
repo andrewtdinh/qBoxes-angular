@@ -18,11 +18,15 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
+        <ion-item menu-close ng-hide='activeUser'>
+          <button class="button button-block icon-right ion-log-in button-balanced" ng-click="login()">
+            Login
+          </button>
         </ion-item>
         <ion-item menu-close ng-show='activeUser'>
-          <button class="button button-block button-assertive" ng-click="logout()">Logout {{displayName}}</button>
+          <button class="button button-block icon-right ion-log-out button-assertive" ng-click="logout()">
+            Logout {{displayName}}
+          </button>
         </ion-item>
       </ion-list>
     </ion-content>
