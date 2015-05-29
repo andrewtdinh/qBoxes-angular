@@ -23,7 +23,11 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
       case 'facebook':
         console.log('Inside Facebook');
         $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
-          return $rootScope.afAuth.$authWithOAuthToken('facebook', result.access_token);
+          return $rootScope.afAuth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
+            showAlert('Successfully login', JSON.stringify(authData));
+          }, function(error){
+            showAlert('ERROR at the firebaseAuth level', error);
+          });
         }, function(error){
           showAlert('ERROR at the facebook level',  error);
         });
