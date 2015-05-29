@@ -63,6 +63,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.constants', 
 
   $scope.oauth = function(provider){
     User.oauth(provider);
+    $scope.modal.hide();
   }
 
   $scope.logout = function(){
