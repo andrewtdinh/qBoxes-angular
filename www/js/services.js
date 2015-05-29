@@ -23,7 +23,7 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
       case 'facebook':
         console.log('Inside Facebook');
         $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
-          return $rootScope.afAuth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
+          $rootScope.afAuth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
             showAlert('Successfully login', JSON.stringify(authData));
           }, function(error){
             showAlert('ERROR at the firebaseAuth level', error);
@@ -36,7 +36,6 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
         console.log('Inside Google');
         $cordovaOauth.google('534265459229-jpvjvcbk8vmevna8i8iccrvgmb7tcp4o.apps.googleusercontent.com', ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result){
           $rootScope.afAuth.$authWithOAuthToken('google', result.access_token).then(function(authData){
-            $scope.modal.hide();
             showAlert('Successfully login', JSON.stringify(authData));
           }, function(error){
             showAlert('ERROR at the firebaseAuth level', error);
