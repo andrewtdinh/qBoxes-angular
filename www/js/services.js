@@ -5,6 +5,10 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
   function User(){
   }
 
+  function goHome(){
+    $state.go('app.home');
+  }
+
   function showAlert(titleStr, response){
     $ionicPopup.alert({
       title: titleStr,
@@ -12,6 +16,21 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
     }).then(function(res) {
       console.log('Test Alert Box');
     });
+  }
+
+  function getDisplayName(data){
+    switch(data.provider){
+      case 'password':
+        return data.password.email;
+      case 'twitter':
+        return data.twitter.username;
+      case 'google':
+        return data.google.displayName;
+      case 'facebook':
+        return data.facebook.displayName;
+      case 'github':
+        return data.github.displayName;
+    }
   }
 
   User.initialize = function(){
@@ -24,6 +43,13 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
         $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
           $rootScope.afAuth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
             console.log('Successfully login data:  ', authData);
+            $rootScope.activeUser = authData;
+            $rootScope.displayName = getDisplayName(authData);
+            $http.defaults.headers.common.Authorization = 'Bearer ' + authData.token;
+            // initialize().then(function(response){
+            //   $rootScope.activeUser.mongoId = response.data;
+            //   goHome();
+            // });
           }, function(error){
             console.log('ERROR at the firebaseAuth level', error);
           });
@@ -35,6 +61,9 @@ angular.module('starter.services', ['starter.constants', 'firebase', 'ngCordova'
         $cordovaOauth.google('534265459229-jpvjvcbk8vmevna8i8iccrvgmb7tcp4o.apps.googleusercontent.com', ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result){
           $rootScope.afAuth.$authWithOAuthToken('google', result.access_token).then(function(authData){
             console.log('Successfully login data:  ', authData);
+            $rootScope.activeUser = authData;
+            $rootScope.displayName = getDisplayName(authData);
+            $http.defaults.headers.common.Authorization = 'Bearer ' + authData.token;
           }, function(error){
             console.log('ERROR at the firebaseAuth level', error);
           });
