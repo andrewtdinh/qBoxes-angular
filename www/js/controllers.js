@@ -2,7 +2,7 @@
 
 angular.module('starter.controllers', ['starter.services', 'starter.constants', 'firebase', 'ngCordova', 'ngCordovaOauth'])
 
-.controller('AppCtrl', function($window, firebaseUrl, $firebaseAuth, $firebaseObject, $scope, $ionicModal, $rootScope, $cordovaOauth, $ionicPopup, User, $http, $state) {
+.controller('AppCtrl', function($window, firebaseUrl, $firebaseAuth, $firebaseObject, $scope, $ionicModal, $rootScope, User, $http, $state) {
   $rootScope.fbRoot = new $window.Firebase(firebaseUrl);
   $rootScope.afAuth = $firebaseAuth($rootScope.fbRoot);
 
