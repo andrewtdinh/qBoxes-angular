@@ -2,7 +2,7 @@
 
 angular.module('starter.controllers', ['starter.services', 'starter.constants', 'firebase', 'ngCordova', 'ngCordovaOauth'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $rootScope, $cordovaOauth, $ionicPopup, User, $http, $state) {
+.controller('AppCtrl', function($firebaseObject, $scope, $ionicModal, $rootScope, $cordovaOauth, $ionicPopup, User, $http, $state) {
   function goHome(){
     $state.go('app.home');
   }
